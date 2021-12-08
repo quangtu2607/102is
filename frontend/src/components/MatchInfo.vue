@@ -2,7 +2,7 @@
     <div class="box">
         <div class="grid-item">{{teamA}}</div>
         <div class="grid-item">{{teamH}}</div> 
-        <div class="grid-item">time: {{time}}</div> 
+        <div class="grid-item">{{time}}</div> 
         <div class="grid-item"></div>
         <div class="grid-item"></div>  
         <div class="grid-item" style= "text-align: right;">
@@ -17,7 +17,7 @@ export default {
     props:{
         teamA: String,   
         teamH: String,
-        time: String
+        time: Date
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="match">
-    <MatchInfo v-for="m in match" :key="m.code" v-bind:teamA="m.team_a" v-bind:teamH="m.team_h" v-bind:time="m.kickoff_time"></MatchInfo>
+    <MatchInfo v-for="m in match" :key="m.code" v-bind:teamA="m.team_a" v-bind:teamH="m.team_h" v-bind:time="m.time"></MatchInfo>
     <!-- <v-snackbar v-model="snackbar" :timeout="8000" top color="red darken-4">
       <span>An error occurred while connecting to the servers.</span>
       <v-btn text color="white" @click="snackbar = false">Close</v-btn>
@@ -124,7 +124,7 @@ export default {
 
       var self = this;
 
-      axios.get('http://127.0.0.1:5000/match')
+      axios.get('http://127.0.0.1/match')
       .then(function (response) {
         // always executed
         // this.match = response.data;
