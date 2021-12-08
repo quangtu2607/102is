@@ -104,8 +104,7 @@
 
 export default {
   created() {
-    this.refresh();
-    this.timer = setInterval(this.refresh, 60000)
+    this.getMatch();
   },
   beforeDestroy() {
     clearInterval(this.timer)
@@ -124,6 +123,16 @@ export default {
     }
   },
   methods: {
+    getMatch() {
+      const axios = require('axios');
+
+      axios.get('http://127.0.0.1:5000/match')
+      .then(function (response) {
+        // always executed
+        let a = response.data;
+        console.log(a);
+  });
+    }
     // switchHighlightFreeGPU() {
     //   this.highlightFreeGPUs = !this.highlightFreeGPUs;
     // },
