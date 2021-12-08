@@ -1,0 +1,39 @@
+from operator import length_hint
+from re import match
+from flask import Flask, render_template, url_for, request, redirect
+from flask_sqlalchemy import SQLAlchemy
+import requests
+import datetime
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////test.db'
+db = SQLAlchemy(app)
+
+def clean(raw_match, teams):
+    raw_match['team_h'] = teams[raw_match['team_h'] - 1]['name']
+    raw_match['team_a'] = teams[raw_match['team_a'] - 1]['name']
+    raw_match['kickoff_time'] = datetime.datetime.strptime(raw_match['kickoff_time'],"%Y-%m-%dT%H:%M:%SZ")
+    raw_match['rate'] = 'test'
+    return raw_match
+
+@app.route("/", methods=['POST', 'GET'])
+def index():
+    if request.method == 'POST':
+        pass
+    else:
+        response = requests.get('https://fantasy.premierleague.com/api/bootstrap-static/')
+        teams = response.json()['teams']
+        for team in teams:
+            print(team['name'])
+        response = requests.get("https://fantasy.premierleague.com/api/fixtures/?future=1")
+        raw_matches = response.json()
+        matches = list(map(lambda x: clean(x, teams), raw_matches))
+        return render_template("index.html", matches=matches)
+
+@app.route("/predict", methods=['POST', 'GET'])
+def predict():
+    if request.method == 'POST':
+        return redirect('/')
+
+if __name__ == "__main__":
+    app.run(debug=True)
