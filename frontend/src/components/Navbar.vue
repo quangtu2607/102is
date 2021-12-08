@@ -7,7 +7,7 @@
     </v-snackbar>
 
     <v-app-bar flat class="grey lighten-4">
-      <img src="~@/assets/logo.png" height="150" width="250">
+      <img src="~@/assets/logo.png" height="150" width="250" margin-top="100">
       <!-- <v-app-bar-nav-icon @click="drawer = !drawer" class="grey--text"></v-app-bar-nav-icon> -->
       <!-- <v-toolbar-title class="text-uppercase grey--text"> -->
         <!-- <span class="font-weight-light">Server</span> -->

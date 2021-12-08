@@ -1,27 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import GPUOverview from '../views/GPUOverview.vue'
-import Processes from '../views/Processes.vue'
-import Users from '../views/Users.vue'
+import Overview from '../views/Overview.vue'
+import Match from '../views/Match.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
     {
         path: '/',
-        name: 'GPUOverview',
-        component: GPUOverview
+        name: 'Overview',
+        component: Overview
     },
     {
-        path: '/processes',
-        name: 'Processes',
-        component: Processes
+        path: '/match',
+        name: 'Match',
+        component: Match
     },
-    {
-        path: '/users',
-        name: 'Users',
-        component: Users
-    }
 ]
 
 const router = new VueRouter({

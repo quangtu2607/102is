@@ -1,14 +1,14 @@
 <template>
-  <div class="gpu-overview">
-    
-
+  <div class="match">
+    <MatchInfo v-for="m in match" :key="m.code" v-bind:teamA="m.team_a" v-bind:teamH="m.team_h" v-bind:time="m.kickoff_time"></MatchInfo>
     <!-- <v-snackbar v-model="snackbar" :timeout="8000" top color="red darken-4">
       <span>An error occurred while connecting to the servers.</span>
       <v-btn text color="white" @click="snackbar = false">Close</v-btn>
     </v-snackbar> -->
 
-    <v-container class="mb-5">
-      <v-row wrap>
+    <!-- <b-container> -->
+      
+      <!-- <v-row wrap> -->
         <!-- <h1 class="subtitle-1 grey--text">Match Overview</h1> -->
         <!-- <v-switch class="px-2 my-1 pt-5" @change="switchHighlightFreeGPU()" color="green lighten-2" label="Highlight free GPUs"></v-switch>
         <v-switch class="px-2 my-1 pt-5" @change="switchShowFreeGPU()" color="green lighten-2" label="Only show servers with free GPUs"></v-switch>
@@ -22,14 +22,19 @@
           </v-btn>
         </div> -->
 
-      </v-row>
+      <!-- </v-row> -->
 
-      <v-row wrap justify="center">
-        <v-card elevation="2" height="100%" width="75%" align="center"><img src="~@/assets/mc.png" height="150" width="250"></v-card>
-      </v-row>
-      <v-row wrap justify="center">
+      <!-- <v-row wrap justify="center" v-for="m in match" :key="m.code"> -->
+        <!-- <v-card elevation="2" height="100%" width="75%" align="center"><img src="~@/assets/mc.png" height="150" width="250"></v-card> -->
+      <!-- </v-row> -->
+      <!-- <ul id="example-1">
+        <li v-for="m in match" :key="m.code">
+          {{ m.code }}
+        </li> 
+      </ul> -->
+      <!-- <v-row wrap justify="center">
         <v-card elevation="2" height="100%" width="75%" align="center">asdasdasdasd</v-card>
-      </v-row>
+      </v-row> -->
         <!-- <v-col class="my-2" cols="12" lg="6" v-for="server in processList()" :key="server.hostname">
           <div class="white">
             <div class="ma-2">
@@ -93,7 +98,7 @@
           </div>
         </v-col> -->
       <!-- </v-row> -->
-    </v-container>
+    <!-- </b-container> -->
 
   </div>
 </template>
@@ -101,37 +106,35 @@
 <script>
 // @ is an alias to /src
 // import { HTTP } from './http-common';
+import MatchInfo from '@/components/MatchInfo.vue';
+import axios from 'axios';
 
 export default {
   created() {
     this.getMatch();
   },
-  beforeDestroy() {
-    clearInterval(this.timer)
-  },
+  components: { MatchInfo },
   data() {
     return {
-      username: localStorage.getItem('username'),
-      servers: [],
-      highlightFreeGPUs: false,
-      onlyShowFreeGPU: false,
-      highlightUsername: true,
-      maxProcessesShow: 1,
-      refreshLoading: false,
-      snackbar: false,
-      date: '',
+      match: [],
     }
   },
   methods: {
     getMatch() {
-      const axios = require('axios');
+
+      var self = this;
 
       axios.get('http://127.0.0.1:5000/match')
       .then(function (response) {
         // always executed
+        // this.match = response.data;
+        // console.log(this.match);
         let a = response.data;
-        console.log(a);
-  });
+        var count = Object.keys(a).length;
+        for (let i = 0; i < count; i++) {
+          self.match.push(a[i]);
+        }
+      });
     }
     // switchHighlightFreeGPU() {
     //   this.highlightFreeGPUs = !this.highlightFreeGPUs;
@@ -182,3 +185,6 @@ export default {
   }
 }
 </script>
+<style scoped>
+
+</style>
