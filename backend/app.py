@@ -38,7 +38,7 @@ def index():
         response = requests.get("https://fantasy.premierleague.com/api/fixtures/?future=1")
         raw_matches = response.json()
         matches = list(map(lambda x: clean(x, teams), raw_matches))
-        response = jsonify({'data': matches})
+        response = jsonify(matches)
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
