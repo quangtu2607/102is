@@ -17,7 +17,7 @@ export default {
     props:{
         teamA: String,   
         teamH: String,
-        time: Date
+        time: String
     }
 }
 </script>
