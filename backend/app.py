@@ -17,6 +17,8 @@ class Match(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     team_h = db.Column(db.String(50), nullable=False)
     team_a = db.Column(db.String(50), nullable=False)
+    finished = db.Column(db.Boolean, nullable=False)
+    started = db.Column(db.Boolean, nullable=False)
 
 def clean(raw_match, teams):
     raw_match['team_h'] = teams[raw_match['team_h'] - 1]['name']
@@ -32,10 +34,13 @@ def index():
     else:
         response = requests.get('https://fantasy.premierleague.com/api/bootstrap-static/')
         teams = response.json()['teams']
+
         response = requests.get("https://fantasy.premierleague.com/api/fixtures/?future=1")
         raw_matches = response.json()
         matches = list(map(lambda x: clean(x, teams), raw_matches))
-        return jsonify(matches)
+        response = jsonify({'data': matches})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
 @app.route("/predict/<int:id>", methods=['POST', 'GET'])
 def predict(id):
