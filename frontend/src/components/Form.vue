@@ -136,6 +136,9 @@
     <v-btn @click="clear">
       clear
     </v-btn>
+        <div>{{teamH}}'s win probability: {{teamh}}</div>
+        <div>Draw probability: {{draw}}</div>
+        <div>{{teamA}}'s win probability: {{teama}}</div>
   </form>
 </template>
 <script>
@@ -145,7 +148,6 @@ import axios from 'axios';
 
   export default {
     mixins: [validationMixin],
-
     validations: {
     //   name: { required, maxLength: maxLength(10) },
     //   email: { required, email },
@@ -158,6 +160,11 @@ import axios from 'axios';
     },
     updated() {
         
+    },
+
+    props:{
+        teamA: String,   
+        teamH: String,
     },
 
     data: () => ({
@@ -174,7 +181,10 @@ import axios from 'axios';
         hy: 0,
         ay: 0,
         hr: 0,
-        ar: 0
+        ar: 0,
+        teama: null,
+        draw: null,
+        teamh: null,
     }),
 
     computed: {
@@ -208,7 +218,7 @@ import axios from 'axios';
 
     methods: {
         submit () {
-            // var self = this;
+        var self = this;
             
         axios.post('http://127.0.0.1:80/predict', {
             FTHG: this.fthg,
@@ -227,7 +237,9 @@ import axios from 'axios';
                     AR: this.ar,
             })
             .then(function (response) {
-                console.log(response);
+                self.teama = response.data.A;
+                self.teamh = response.data.H;
+                self.draw = response.data.D;
             })
             .catch(function (error) {
                 console.log(error);

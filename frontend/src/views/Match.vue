@@ -8,15 +8,15 @@
     </v-snackbar> -->
 
     <div class="box">
-      <div class="grid-item">{{teamA}}</div>
+      <div class="grid-item">{{teamH}}</div>
       <div class="grid-item"></div> 
-      <div class="grid-item">{{teamH}}</div> 
-      <div class="grid-item"><img :src="require(`@/assets/${teamA}.png`)" height="50" width="50"></div>
+      <div class="grid-item">{{teamA}}</div> 
+      <div class="grid-item"><img :src="require(`@/assets/${teamH}.png`)" height="50" width="50"></div>
       <div class="grid-item"></div> 
-      <div class="grid-item"><img :src="require(`@/assets/${teamH}.png`)" height="50" width="50"></div> 
+      <div class="grid-item"><img :src="require(`@/assets/${teamA}.png`)" height="50" width="50"></div> 
     </div>
     <div class="form">
-      <Form></Form>
+      <Form v-bind:teamA="teamA" v-bind:teamH="teamH"></Form>
     </div>
       <!-- <v-row wrap>
         <v-switch class="px-2 my-1 pt-5" @change="switchMyProc()" color="primary" label="Only show my processes"></v-switch>
