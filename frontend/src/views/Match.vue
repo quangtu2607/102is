@@ -8,15 +8,14 @@
     </v-snackbar> -->
 
     <div class="box">
+      <div class="grid-item"></div> 
       <div class="grid-item">{{teamH}}</div>
       <div class="grid-item"></div> 
-      <div class="grid-item"></div> 
-      <div class="grid-item"></div> 
       <div class="grid-item">{{teamA}}</div> 
+      <div class="grid-item"></div> 
+      <div class="grid-item"></div> 
       <div class="grid-item"><img :src="require(`@/assets/${teamH}.png`)" height="50" width="50"></div>
-      <div class="grid-item"></div> 
       <div class="grid-item">vs</div> 
-      <div class="grid-item"></div> 
       <div class="grid-item"><img :src="require(`@/assets/${teamA}.png`)" height="50" width="50"></div> 
     </div>
     <div class="form">
@@ -99,6 +98,6 @@ export default {
         border: 1px solid black;
         padding:10px;
         margin: auto;
-        width: 60%;
+        width: 50%;
     }
 </style>
