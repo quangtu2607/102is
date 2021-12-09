@@ -1,6 +1,7 @@
 <template>
     <div class="box">
         <div class="grid-item">{{teamH}}</div>
+        <div class="grid-item"></div> 
         <div class="grid-item">{{teamA}}</div> 
         <div class="grid-item">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -8,8 +9,10 @@
         </div> 
         <div class="grid-item"></div> 
         <div class="grid-item"><img :src="require(`@/assets/${teamH}.png`)" height="50" width="50"></div>
+        <div class="grid-item">vs</div> 
         <div class="grid-item"><img :src="require(`@/assets/${teamA}.png`)" height="50" width="50"></div>  
         
+        <div class="grid-item"></div> 
         <div class="grid-item"></div> 
         <div class="grid-item"></div> 
         <div class="grid-item"></div> 
@@ -34,6 +37,11 @@ export default {
     data() {
         return {
             // teamALogo: "~@/assets/" + this.teamA + ".png"
+            stadium: [
+                {
+                    Asernal: "Emirates" 
+                }
+            ]
         }
     },
     methods: {
@@ -51,7 +59,7 @@ export default {
         margin: auto;
         width: 60%;
         display: grid;
-        grid-template-columns: auto auto auto auto;
+        grid-template-columns: auto auto auto auto auto;
     }
     .grid-item {
         padding:10px;
