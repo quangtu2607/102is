@@ -1,14 +1,20 @@
 <template>
   <div class="processes">
-    <h1 class="subtitle-1 grey--text">Processes</h1>
+    <!-- <h1 class="subtitle-1 grey--text">Processes</h1> -->
 
-    <v-snackbar v-model="snackbar" :timeout="8000" top color="red darken-4">
+    <!-- <v-snackbar v-model="snackbar" :timeout="8000" top color="red darken-4">
       <span>An error occurred while connecting to the servers.</span>
       <v-btn text color="white" @click="snackbar = false">Close</v-btn>
-    </v-snackbar>
+    </v-snackbar> -->
 
-    <v-container class="my-5">
-      <v-row wrap>
+    <div class="box">
+      <div class="grid-item">{{teamA}}</div>
+      <div class="grid-item">{{teamH}}</div> 
+    </div>
+    <div class="form">
+      <Form></Form>
+    </div>
+      <!-- <v-row wrap>
         <v-switch class="px-2 my-1 pt-5" @change="switchMyProc()" color="primary" label="Only show my processes"></v-switch>
         <v-text-field class="px-2 my-1" v-model="username" color="purple" @change="store_username()" label="Type in username to filter"></v-text-field>
         <v-spacer></v-spacer>
@@ -52,68 +58,53 @@
             </tr>
           </tbody>
         </v-simple-table>
-      </div>
-    </v-container>
-
+      </div> -->
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import { HTTP } from './http-common';
+import Form from '@/components/Form.vue';
 
 export default {
   created() {
-    this.refresh();
-    this.timer = setInterval(this.refresh, 60000)
+    this.getMatch();
   },
-  beforeDestroy() {
-    clearInterval(this.timer)
+  mounted() {
+    let data = this.$route.params.data;
+    this.teamA = data.teamA;
+    this.teamH = data.teamH;
   },
+  components: { Form },
   data() {
     return {
-      username: localStorage.getItem('username'),
-      processes: [],
-      refreshLoading: false,
-      onlyShowMyProc: false,
-      snackbar: false,
-      date: '',
+      teamA: String,
+      teamH: String
     }
   },
   methods: {
-    switchMyProc() {
-      this.onlyShowMyProc = !this.onlyShowMyProc;
-    },
-    store_username() {
-      localStorage.setItem('username', this.username);
-    },
-    processList() {
-      let processListFiltered = [];
-      if (this.onlyShowMyProc) {
-        for (let i = 0; i < this.processes.length; i++) {
-          if (this.processes[i].user === this.username) {
-            processListFiltered.push(this.processes[i]);
-          }
-        }
-      } else {
-        processListFiltered = this.processes;
-      }
-      return processListFiltered;
-    },
-    refresh() {
-      this.refreshLoading = true;
-      HTTP.get('get-processes')
-          .then(res => {
-            this.processes = res.data;
-            this.refreshLoading = false;
-            this.date = new Date().toLocaleString("de-DE", {timeZone: "Europe/Berlin"});
-          })
-          .catch(err => {
-            console.log(err);
-            this.refreshLoading = false;
-            this.snackbar = true;
-          });
-    }
+    
   }
 }
 </script>
+<style>
+    .box {
+        background-color: white;
+        border: 1px solid black;
+        padding:10px;
+        margin: auto;
+        width: 60%;
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+    .form {
+        background-color: white;
+        border: 1px solid black;
+        padding:10px;
+        margin: auto;
+        width: 60%;
+    }
+    .grid-item {
+        padding:10px;
+        text-align: center;
+    }
+</style>

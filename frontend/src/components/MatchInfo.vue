@@ -6,8 +6,8 @@
         <div class="grid-item"></div>
         <div class="grid-item"></div>  
         <div class="grid-item" style= "text-align: right;">
-            <button @click="$router.push('/match')"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-            
+            <!-- <button @click="$router.push('/match')"><i class="fa fa-arrow-right" aria-hidden="true"></i></button> -->
+            <button @click="handleClick"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
         </div> 
     </div>
 </template>
@@ -18,7 +18,23 @@ export default {
         teamA: String,   
         teamH: String,
         time: String
+    },
+    data() {
+    return {
     }
+  },
+  methods: {
+      handleClick() {
+      let data = {
+        teamA: this.teamA,
+        teamH: this.teamH
+      };
+      this.$router.push({
+        name:"Match", 
+        params: {data}
+      });
+    }
+  }
 }
 </script>
 <style>
