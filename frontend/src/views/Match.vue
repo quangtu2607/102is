@@ -11,6 +11,9 @@
       <div class="grid-item">{{teamA}}</div>
       <div class="grid-item"></div> 
       <div class="grid-item">{{teamH}}</div> 
+      <div class="grid-item"><img :src="require(`@/assets/${teamA}.png`)" height="50" width="50"></div>
+      <div class="grid-item"></div> 
+      <div class="grid-item"><img :src="require(`@/assets/${teamH}.png`)" height="50" width="50"></div> 
     </div>
     <div class="form">
       <Form></Form>

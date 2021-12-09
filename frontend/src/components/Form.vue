@@ -1,6 +1,6 @@
 <template>
   <form>
-    <v-text-field
+    <!-- <v-text-field
       v-model="name"
       :error-messages="nameErrors"
       :counter="10"
@@ -33,7 +33,99 @@
       required
       @change="$v.checkbox.$touch()"
       @blur="$v.checkbox.$touch()"
-    ></v-checkbox>
+    ></v-checkbox> -->
+    <v-text-field
+      v-model="fthg"
+      label="FTHG"
+      required
+    ></v-text-field>
+
+    <v-text-field
+      v-model="ftag"
+      label="FTAG"
+      required
+    ></v-text-field>
+
+    <v-text-field
+      v-model="hs"
+      label="HS"
+      required
+    ></v-text-field>
+
+    <v-text-field
+      v-model="as"
+      label="AS"
+      required
+    ></v-text-field>
+
+    <v-text-field
+      v-model="hst"
+      label="HST"
+      required
+    ></v-text-field>
+
+
+    <v-text-field
+      v-model="ast"
+      label="AST"
+      required
+    ></v-text-field>
+
+
+    <v-text-field
+      v-model="hf"
+      label="HF"
+      required
+    ></v-text-field>
+
+
+    <v-text-field
+      v-model="af"
+      label="AF"
+      required
+    ></v-text-field>
+
+
+    <v-text-field
+      v-model="hc"
+      label="HC"
+      required
+    ></v-text-field>
+
+
+    <v-text-field
+      v-model="ac"
+      label="AC"
+      required
+    ></v-text-field>
+
+
+    <v-text-field
+      v-model="hy"
+      label="HY"
+      required
+    ></v-text-field>
+
+    <v-text-field
+      v-model="ay"
+      label="AY"
+      required
+    ></v-text-field>
+
+
+    <v-text-field
+      v-model="hr"
+      label="HR"
+      required
+    ></v-text-field>
+
+    <v-text-field
+      v-model="ar"
+      label="AR"
+      required
+    ></v-text-field>
+
+
 
     <v-btn
       class="mr-4"
@@ -48,75 +140,113 @@
 </template>
 <script>
   import { validationMixin } from 'vuelidate'
-  import { required, maxLength, email } from 'vuelidate/lib/validators'
+//   import { required, maxLength, email } from 'vuelidate/lib/validators'
+import axios from 'axios';
 
   export default {
     mixins: [validationMixin],
 
     validations: {
-      name: { required, maxLength: maxLength(10) },
-      email: { required, email },
-      select: { required },
-      checkbox: {
-        checked (val) {
-          return val
-        },
-      },
+    //   name: { required, maxLength: maxLength(10) },
+    //   email: { required, email },
+    //   select: { required },
+    //   checkbox: {
+    //     checked (val) {
+    //       return val
+    //     },
+    //   },
+    },
+    updated() {
+        
     },
 
     data: () => ({
-      name: '',
-      email: '',
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-      ],
-      checkbox: false,
+        fthg: 0,
+        ftag: 0,
+        hs: 0,
+        as: 0,
+        hst: 0,
+        ast: 0,
+        hf: 0,
+        af: 0,
+        hc: 0,
+        ac: 0,
+        hy: 0,
+        ay: 0,
+        hr: 0,
+        ar: 0
     }),
 
     computed: {
-      checkboxErrors () {
-        const errors = []
-        if (!this.$v.checkbox.$dirty) return errors
-        !this.$v.checkbox.checked && errors.push('You must agree to continue!')
-        return errors
-      },
-      selectErrors () {
-        const errors = []
-        if (!this.$v.select.$dirty) return errors
-        !this.$v.select.required && errors.push('Item is required')
-        return errors
-      },
-      nameErrors () {
-        const errors = []
-        if (!this.$v.name.$dirty) return errors
-        !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
-        !this.$v.name.required && errors.push('Name is required.')
-        return errors
-      },
-      emailErrors () {
-        const errors = []
-        if (!this.$v.email.$dirty) return errors
-        !this.$v.email.email && errors.push('Must be valid e-mail')
-        !this.$v.email.required && errors.push('E-mail is required')
-        return errors
-      },
+    //   checkboxErrors () {
+    //     const errors = []
+    //     if (!this.$v.checkbox.$dirty) return errors
+    //     !this.$v.checkbox.checked && errors.push('You must agree to continue!')
+    //     return errors
+    //   },
+    //   selectErrors () {
+    //     const errors = []
+    //     if (!this.$v.select.$dirty) return errors
+    //     !this.$v.select.required && errors.push('Item is required')
+    //     return errors
+    //   },
+    //   nameErrors () {
+    //     const errors = []
+    //     if (!this.$v.name.$dirty) return errors
+    //     !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
+    //     !this.$v.name.required && errors.push('Name is required.')
+    //     return errors
+    //   },
+    //   emailErrors () {
+    //     const errors = []
+    //     if (!this.$v.email.$dirty) return errors
+    //     !this.$v.email.email && errors.push('Must be valid e-mail')
+    //     !this.$v.email.required && errors.push('E-mail is required')
+    //     return errors
+    //   },
     },
 
     methods: {
-      submit () {
-        this.$v.$touch()
-      },
-      clear () {
-        this.$v.$reset()
-        this.name = ''
-        this.email = ''
-        this.select = null
-        this.checkbox = false
-      },
+        submit () {
+            // var self = this;
+            axios({
+                method: 'post',
+                url: 'http://127.0.0.1:80/predict',
+                data: {
+                    fthg: this.fthg,
+                    ftag: this.ftag,
+                    hs: this.hs,
+                    as: this.as,
+                    hst: this.hst,
+                    ast: this.ast,
+                    hf: this.hf,
+                    af: this.af,
+                    hc: this.hc,
+                    ac: this.ac,
+                    hy: this.hy,
+                    ay: this.ay,
+                    hr: this.hr,
+                    ar: this.ar,
+                }
+            });
+        },
+        clear () {
+            this.$v.$reset()
+            this.fthg = null
+            this.ftag = null,
+            this.hs = null,
+            this.as = null,
+            this.hst = null,
+            this.ast = null,
+            this.hf = null,
+            this.af = null,
+            this.hc = null,
+            this.ac = null,
+            this.hy = null,
+            this.ay = null,
+            this.hr = null,
+            this.ar = null
+        },
     },
   }
 </script>
