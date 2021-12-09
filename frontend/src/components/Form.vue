@@ -139,7 +139,7 @@
   </form>
 </template>
 <script>
-  import { validationMixin } from 'vuelidate'
+import { validationMixin } from 'vuelidate'
 //   import { required, maxLength, email } from 'vuelidate/lib/validators'
 import axios from 'axios';
 
@@ -213,20 +213,20 @@ import axios from 'axios';
                 method: 'post',
                 url: 'http://127.0.0.1:80/predict',
                 data: {
-                    fthg: this.fthg,
-                    ftag: this.ftag,
-                    hs: this.hs,
-                    as: this.as,
-                    hst: this.hst,
-                    ast: this.ast,
-                    hf: this.hf,
-                    af: this.af,
-                    hc: this.hc,
-                    ac: this.ac,
-                    hy: this.hy,
-                    ay: this.ay,
-                    hr: this.hr,
-                    ar: this.ar,
+                    FTHG: this.fthg,
+                    FTAG: this.ftag,
+                    HS: this.hs,
+                    AS: this.as,
+                    HST: this.hst,
+                    AST: this.ast,
+                    HF: this.hf,
+                    AF: this.af,
+                    HC: this.hc,
+                    AC: this.ac,
+                    HY: this.hy,
+                    AY: this.ay,
+                    HR: this.hr,
+                    AR: this.ar,
                 }
             });
         },
