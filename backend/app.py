@@ -23,7 +23,6 @@ class Match(db.Model):
     time = db.Column(db.DateTime, nullable=False)
 
 @app.route("/match", methods=['POST', 'GET'])
-@app.route("/predict", methods=['POST'])
 def index():
     if request.method == 'POST':
         pass
@@ -36,6 +35,7 @@ def index():
         response = jsonify(matches)
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
+@app.route("/predict", methods=['POST'])
 def predict():
     import numpy as np
     with open('./static/model/randomforest.pkl', 'rb') as f:
