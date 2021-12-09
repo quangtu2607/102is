@@ -12,9 +12,8 @@ const routes = [
         component: Overview
     },
     {
-        path: '/match',
-        name: 'Match',
-        component: Match
+        path: '/match/:teamA/:teamH',
+        component: Match,
     },
 ]
 

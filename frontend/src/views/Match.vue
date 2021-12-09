@@ -68,12 +68,11 @@ import Form from '@/components/Form.vue';
 
 export default {
   created() {
-    this.getMatch();
+    this.teamA = this.$route.params.teamA;
+    this.teamH = this.$route.params.teamH;
   },
   mounted() {
-    let data = this.$route.params.data;
-    this.teamA = data.teamA;
-    this.teamH = data.teamH;
+    
   },
   components: { Form },
   data() {
@@ -83,7 +82,7 @@ export default {
     }
   },
   methods: {
-    
+
   }
 }
 </script>

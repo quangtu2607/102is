@@ -19,22 +19,19 @@ export default {
         teamH: String,
         time: String
     },
+    created() {
+
+    },
     data() {
-    return {
-    }
-  },
-  methods: {
-      handleClick() {
-      let data = {
-        teamA: this.teamA,
-        teamH: this.teamH
-      };
-      this.$router.push({
-        name:"Match", 
-        params: {data}
-      });
-    }
-  }
+        return {
+            
+        }
+    },
+    methods: {
+        handleClick() {
+            this.$router.push('/match/' + this.teamA + '/' + this.teamH);  
+        }
+    } 
 }
 </script>
 <style>

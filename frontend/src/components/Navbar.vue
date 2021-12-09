@@ -7,7 +7,7 @@
     </v-snackbar>
 
     <v-app-bar flat class="grey lighten-4">
-      <button @click="$router.push('/')">
+      <button @click="onMouseClick">
         <img src="~@/assets/logo.png" height="150" width="250" margin-top="100">
       </button>
       <!-- <v-app-bar-nav-icon @click="drawer = !drawer" class="grey--text"></v-app-bar-nav-icon> -->
@@ -70,6 +70,12 @@ export default {
         { icon: 'paid', text: 'FaBet88', route: '/users' },
       ],
       snackbar: false
+    }
+  },
+  methods: {
+    onMouseClick() {
+      this.$router.push('/');
+      this.$router.go();
     }
   }
 }
