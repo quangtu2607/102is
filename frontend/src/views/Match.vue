@@ -1,5 +1,5 @@
 <template>
-  <div class="processes">
+  <div>
     <!-- <h1 class="subtitle-1 grey--text">Processes</h1> -->
 
     <!-- <v-snackbar v-model="snackbar" :timeout="8000" top color="red darken-4">
@@ -7,8 +7,9 @@
       <v-btn text color="white" @click="snackbar = false">Close</v-btn>
     </v-snackbar> -->
 
-    <div class="match">
+    <div class="box">
       <div class="grid-item">{{teamA}}</div>
+      <div class="grid-item"></div> 
       <div class="grid-item">{{teamH}}</div> 
     </div>
     <div class="form">
@@ -87,24 +88,11 @@ export default {
 }
 </script>
 <style>
-    .match {
-        background-color: white;
-        border: 1px solid black;
-        padding:10px;
-        margin: auto;
-        width: 60%;
-        display: grid;
-        grid-template-columns: auto auto;
-    }
     .form {
         background-color: white;
         border: 1px solid black;
         padding:10px;
         margin: auto;
         width: 60%;
-    }
-    .grid-item {
-        padding:10px;
-        text-align: center;
     }
 </style>
