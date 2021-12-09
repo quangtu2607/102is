@@ -1,11 +1,13 @@
 from operator import length_hint
 from re import match
-from flask import Flask, render_template, url_for, request, redirect, jsonify
+from flask import Flask, json, render_template, url_for, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS, cross_origin
 import pickle
 import datetime
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -23,6 +25,7 @@ class Match(db.Model):
     time = db.Column(db.DateTime, nullable=False)
 
 @app.route("/match", methods=['POST', 'GET'])
+@cross_origin(supports_credentials=True)
 def index():
     if request.method == 'POST':
         pass
@@ -33,9 +36,9 @@ def index():
             del temp['_sa_instance_state']
             matches.append(temp)
         response = jsonify(matches)
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 @app.route("/predict", methods=['POST'])
+@cross_origin(supports_credentials=True)
 def predict():
     import numpy as np
     with open('./static/model/randomforest.pkl', 'rb') as f:
@@ -46,8 +49,8 @@ def predict():
                            match_stats['HC'], match_stats['AC'], match_stats['HY'], \
                            match_stats['AY'], match_stats['HR'], match_stats['AR']]])
     result = load_model.predict_proba(datapoint).flatten()
-    response = {'A': result[0], 'D': result[1], 'H': result[2]}
-    return jsonify(response)
+    response = jsonify({'A': result[0], 'D': result[1], 'H': result[2]})
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True, port=80)
