@@ -7,7 +7,7 @@
       <v-btn text color="white" @click="snackbar = false">Close</v-btn>
     </v-snackbar> -->
 
-    <div class="box">
+    <div class="match">
       <div class="grid-item">{{teamA}}</div>
       <div class="grid-item">{{teamH}}</div> 
     </div>
@@ -87,7 +87,7 @@ export default {
 }
 </script>
 <style>
-    .box {
+    .match {
         background-color: white;
         border: 1px solid black;
         padding:10px;
