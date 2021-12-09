@@ -209,11 +209,9 @@ import axios from 'axios';
     methods: {
         submit () {
             // var self = this;
-            axios({
-                method: 'post',
-                url: 'http://127.0.0.1:80/predict',
-                data: {
-                    FTHG: this.fthg,
+            
+        axios.post('http://127.0.0.1:80/predict', {
+            FTHG: this.fthg,
                     FTAG: this.ftag,
                     HS: this.hs,
                     AS: this.as,
@@ -227,7 +225,12 @@ import axios from 'axios';
                     AY: this.ay,
                     HR: this.hr,
                     AR: this.ar,
-                }
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
             });
         },
         clear () {
