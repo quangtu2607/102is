@@ -95,7 +95,7 @@ export default {
 <style>
     .form {
         background-color: white;
-        border: 1px solid black;
+        border: 1px hidden black;
         padding:10px;
         margin: auto;
         width: 50%;

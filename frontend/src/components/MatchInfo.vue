@@ -120,7 +120,8 @@ export default {
 <style>
     .box {
         background-color: white;
-        border: 1px solid black;
+        border: 1px hidden black;
+        border-bottom: 1px solid black;
         padding:10px;
         margin: auto;
         width: 50%;
