@@ -136,9 +136,9 @@
     <v-btn @click="clear">
       clear
     </v-btn>
-        <div>{{teamH}}'s win probability: {{teamh}}</div>
-        <div>Draw probability: {{draw}}</div>
-        <div>{{teamA}}'s win probability: {{teama}}</div>
+        <div>{{teamH}}'s win probability: {{teamh*100}}%</div>
+        <div>Draw probability: {{draw*100}}%</div>
+        <div>{{teamA}}'s win probability: {{teama*100}}%</div>
   </form>
 </template>
 <script>
